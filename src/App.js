@@ -1,23 +1,27 @@
 import logo from './logo.svg';
 import './App.css';
+import Axios from 'axios';
+import { getRoles } from '@testing-library/react';
 
 function App() {
+
+  const get_an_excuse = (thing) =>
+  {
+
+    console.log(thing)
+
+    Axios.get(`https://excuser-three.vercel.app/v1/excuse/${thing}`).then((res) => 
+    {
+      console.log(res.data[0].excuse);
+    })
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Get an Excuse</h1>
+      <button onClick={() => get_an_excuse('party')}> Party </button>
+      <button onClick={() => get_an_excuse('family')}> Family </button>
+      <button onClick={() => get_an_excuse('office')}> Office </button>
     </div>
   );
 }
